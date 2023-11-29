@@ -43,15 +43,15 @@ Allows the user to initiate the processing of PDF files with a button click.
   How to Run:
   Install the required dependencies by running:
 
-  ```bash
   Copy code
+  ```bash
   pip install PyPDF2 streamlit
   ```
   
 Run the program:
 
-``` bash
 Copy code
+``` bash
 python your_script_name.py
 ```
 Replace your_script_name.py with the actual name of your Python script.
