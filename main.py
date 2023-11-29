@@ -61,6 +61,8 @@ def main():
     # Convert to raw string to handle backslashes in Windows paths
     source_folder = rf"{source_folder}"
 
+    # Debugging output
+    print(f"Source Folder: {source_folder}")
 
     if st.button("Process Files"):
         
