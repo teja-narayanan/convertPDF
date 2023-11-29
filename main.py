@@ -58,6 +58,9 @@ def main():
     # Get destination folder's path as user input
     # dest_folder = st.text_input("Enter the path to the destination folder:")
 
+    # Convert to raw string to handle backslashes in Windows paths
+    source_folder = rf"{source_folder}"
+
 
     if st.button("Process Files"):
         
