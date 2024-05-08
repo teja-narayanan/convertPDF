@@ -4,10 +4,11 @@ import re
 import os
 import shutil
 from pathlib import Path
+import sys
 
 # extract_data_and_create
 def extract_data_and_create(pdf_path, destination_folder):
-    #extract text from given pdf file
+    # Extract text from the given PDF file
     with open(pdf_path, 'rb') as pdf_file:
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         text = pdf_reader.pages[0].extract_text()
@@ -35,7 +36,7 @@ def extract_data_and_create(pdf_path, destination_folder):
         new_file_name = f"{tax_year}_{primary_last_name}_{primary_first_name}.pdf"
         new_file_path = os.path.join(folder_path, new_file_name)
 
-        # duplicate file
+        # Duplicate file
         shutil.copy(pdf_path, new_file_path)
 
         # Delete the original file
@@ -44,7 +45,7 @@ def extract_data_and_create(pdf_path, destination_folder):
         print(f"New PDF created and saved as: {new_file_path}")
         print(f"Original PDF deleted: {pdf_path}")
 
-    # handle invalid case
+    # Handle invalid case
     else:
         print("Required information not found in the PDF.")
 
@@ -55,21 +56,14 @@ def main():
     # Get source folder's path as user input
     source_folder = st.text_input("Enter the path to the source folder:")
 
-    # Get destination folder's path as user input
-    # dest_folder = st.text_input("Enter the path to the destination folder:")
-
     # Convert to raw string to handle backslashes in Windows paths
     source_folder = rf"{source_folder}"
 
-    # Debugging output
-    print(f"Source Folder: {source_folder}")
-
     if st.button("Process Files"):
-        
         # Ensure the source folder exists
         if not os.path.exists(source_folder):
             st.error("Error: Source folder does not exist.")
-            # return
+            return
 
         # Iterate through all the available files in the source folder
         for filename in os.listdir(source_folder):
@@ -83,4 +77,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # Check if running as a standalone executable
+    if getattr(sys, 'frozen', False):
+        # Change the working directory to the directory of the executable
+        os.chdir(sys._MEIPASS)
+
     main()
